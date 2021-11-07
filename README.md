@@ -16,6 +16,7 @@ Optimization objective:<br/>
 
  
 Subject to constraint:<br/>
+\sum_{i}y_{i}s_{i} \leq D
 
 ![eqation](https://latex.codecogs.com/svg.latex?%7B%5Ccolor%7BWhite%7D%20%5Csum_%7Bi%7Dy_%7Bi%7Ds_%7Bi%7D%5Cleq%20D%7D)
 
