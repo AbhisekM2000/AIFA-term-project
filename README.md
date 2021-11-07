@@ -12,12 +12,12 @@ Let the binary decision variable be y<sub>i</sub>. <br/>
 y<sub>i</sub> =1, if T<sub>i</sub> is implemented by Software, else if y<sub>i</sub>=0, then it is implemented by hardware.<br/>
 Optimization objective:<br/>
 
-![equation](https://latex.codecogs.com/svg.latex?%7B%5Ccolor%7BWhite%7D%20%5Csum_%7Bi%7D%281-y_%7Bi%7D%29h_%7Bi%7D%7D)
+![equation](https://latex.codecogs.com/svg.latex?%5Csum_%7Bi%7D%281-y_%7Bi%7D%29h_%7Bi%7D)
 
  
 Subject to constraint:<br/>
 
-![eqation](https://latex.codecogs.com/svg.latex?%7B%5Ccolor%7BWhite%7D%20%5Csum_%7Bi%7Dy_%7Bi%7Ds_%7Bi%7D%5Cleq%20D%7D)
+![eqation](https://latex.codecogs.com/svg.latex?%5Csum_%7Bi%7Dy_%7Bi%7Ds_%7Bi%7D%5Cleq%20D)
 
 
 Where, D denotes the total Software resources available
