@@ -12,7 +12,7 @@ Let the binary decision variable be $`y_{i}`$. <br/>
 $`y_{i} =1`$, if $`T_{i}`$ is implemented by Software, else if $`y_{i}`$=0, then it is implemented by hardware.<br/>
 Optimization objective:<br/>
 ```math
-<img src="https://render.githubusercontent.com/render/math?math=\sum_{i}(1-y_{i})h_{i}">
+<img src="http://www.sciweavers.org/tex2img.php?eq=%5Csum_%7Bi%7D%281-y_%7Bi%7D%29h_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\sum_{i}(1-y_{i})h_{i}" width="101" height="42" />
 ```
  
 Subject to constraint:<br/>
