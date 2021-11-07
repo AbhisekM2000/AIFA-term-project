@@ -17,7 +17,7 @@ Optimization objective:<br/>
  
 Subject to constraint:<br/>
 
-![eqation](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Csum_%7Bi%7Dy_%7Bi%7Ds_%7Bi%7D%20%5Cleq%20D)
+![eqation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cbg_white%20%5Csum_%7Bi%7Dy_%7Bi%7Ds_%7Bi%7D%20%5Cleq%20D)
 
 
 Where, D denotes the total Software resources available
