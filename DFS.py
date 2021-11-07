@@ -4,7 +4,7 @@ import time
 import random
 
 # We initialize the hardware area and software time vectors
-print_intermediate=False
+print_intermediate = False
 
 # len = int(input("Enter the total number of tasks :"))
 # H = list(map(int, input("Enter the hardware area of each task :").split()))
@@ -13,34 +13,13 @@ print_intermediate=False
 
 H = []
 S = []
-D = 200  # Software limit
-len = 20
+D = 100  # Software limit
+len = 10
 for i in range(len):
     H.append(random.randint(1, 30))
 for i in range(len):
     S.append(random.randint(1, 30))
 
-triplets = []  # In thhe triplet we store the index and the hardware area and software time
-for i in range(len):
-    triplets.append((i, H[i], S[i]))
-
-# We sort the triplets by the by hardware area/software time ratio
-sorted_triplets = sorted(triplets, key=lambda t: t[1]/t[2], reverse=True)
-
-task_order = []  # The new order of tasks after sorting
-H_prefix = []  # The prefix sum of hardware areas
-S_prefix = []  # The preex sum of software times
-
-cnt = 0
-for ind, *args in sorted_triplets:
-    task_order.append(ind)
-    if cnt == 0:
-        H_prefix.append(H[ind])
-        S_prefix.append(S[ind])
-    else:
-        H_prefix.append(H[ind]+H_prefix[-1])
-        S_prefix.append(S[ind]+S_prefix[-1])
-    cnt += 1
 
 CB = 1000000  # Current best hardware area, we take a large value since we need to minimize it
 final_solution = []  # Store the final solution
@@ -62,11 +41,11 @@ def dfs(depth, res, software_limit, H, S):
                 software_time += S[index]
             index += 1
         if software_time > software_limit:
-            if print_intermediate==True:
+            if print_intermediate == True:
                 print("Allocation impossible, software resources exhausted for :", res)
             return
 
-        if print_intermediate==True:
+        if print_intermediate == True:
             print("Allocated tasks are :", res)
         if software_time <= software_limit and hardware_area < CB:
             final_solution = res

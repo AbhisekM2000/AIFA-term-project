@@ -15,8 +15,8 @@ print_intermediate=False
 
 H = []
 S = []
-D = 200  # Software limit
-len = 20
+D = 100  # Software limit
+len = 10
 for i in range(len):
     H.append(random.randint(1, 30))
 for i in range(len):
