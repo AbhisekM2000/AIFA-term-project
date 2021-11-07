@@ -2,14 +2,25 @@ from helper import find_index, calc_h_n
 from collections import deque
 from queue import LifoQueue
 import time
+import random
 
 # We initialize the hardware area and software time vectors
-len = int(input("Enter the total number of tasks :"))
-# H = [10, 10, 12, 18]
-# S = [2, 4, 6, 9]
-# len = 4
-H = list(map(int, input("Enter the hardware area of each task :").split()))
-S = list(map(int, input("Enter the software time of each task :").split()))
+
+print_intermediate=False
+
+# len = int(input("Enter the total number of tasks :"))
+# H = list(map(int, input("Enter the hardware area of each task :").split()))
+# S = list(map(int, input("Enter the software time of each task :").split()))
+# D=int(input("Enter the software time limit (constraint) :"))
+
+H = []
+S = []
+D = 200  # Software limit
+len = 20
+for i in range(len):
+    H.append(random.randint(1, 30))
+for i in range(len):
+    S.append(random.randint(1, 30))
 
 triplets = []  # In thhe triplet we store the index and the hardware area and software time
 for i in range(len):
@@ -22,17 +33,18 @@ task_order = []  # The new order of tasks after sorting
 H_prefix = []  # The prefix sum of hardware areas
 S_prefix = []  # The preex sum of software times
 
+cnt = 0
 for ind, *args in sorted_triplets:
     task_order.append(ind)
-    if ind == 0:
+    if cnt == 0:
         H_prefix.append(H[ind])
         S_prefix.append(S[ind])
     else:
         H_prefix.append(H[ind]+H_prefix[-1])
         S_prefix.append(S[ind]+S_prefix[-1])
+    cnt += 1
 
 
-D = 15  # Software limit
 g_n = 0  # Actual hardware cost of tasks allocated to software
 g_dash_n = 0  # Actual software execution time of tasks allocated
 CB = 0  # Current best is 0
@@ -73,6 +85,8 @@ while(1):
             # We update the parameters
             g_n += H[task_number]
             g_dash_n += S[task_number]
+            if D-g_dash_n < 0:
+                continue
             h_n = calc_h_n(depth+1, find_index(depth, len, S_prefix,
                            D-g_dash_n), H_prefix, H, S_prefix, S, D-g_dash_n)
             f_n = h_n+g_n
@@ -84,9 +98,10 @@ while(1):
             if depth == len-1:
                 CB = g_n
                 final_solution = res
-                print("Temporary solution found :", res)
-                print("Current best=", CB)
-                print("-----------------------------------")
+                if print_intermediate==True:
+                    print("Temporary solution found :", res)
+                    print("Current best=", CB)
+                    print("-----------------------------------")
                 continue
 
             res1 = res.copy()
@@ -100,6 +115,7 @@ while(1):
                 (depth+1, task_order[depth+1], 1, g_n, g_dash_n, h_n, f_n, res2))
 
         else:
+
             h_n = calc_h_n(depth+1, find_index(depth, len, S_prefix,
                            D-g_dash_n), H_prefix, H, S_prefix, S, D-g_dash_n)
             f_n = h_n+g_n
@@ -107,13 +123,15 @@ while(1):
             if h_n < 0:
                 continue
 
+
             # If we reach a leaf node, we update the CB (Current best) and store the solution and we continue
-            if depth == len-1:
+            if depth == len-1 :
                 CB = g_n
                 final_solution = res
-                print("Temporary solution found :", res)
-                print("Current best=", CB)
-                print("-----------------------------------")
+                if print_intermediate==True:
+                    print("Temporary solution found :", res)
+                    print("Current best=", CB)
+                    print("-----------------------------------")
                 continue
 
             res1 = res.copy()
@@ -133,9 +151,9 @@ software_time = 0
 index = 0
 for val in final_solution:
     if val == 0:
-        hardware_area += H[index]
+        hardware_area += H[task_order[index]]
     if val == 1:
-        software_time += S[index]
+        software_time += S[task_order[index]]
     index += 1
 
 index = 0

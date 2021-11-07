@@ -1,15 +1,24 @@
 from collections import deque
 from queue import LifoQueue
 import time
+import random
 
 # We initialize the hardware area and software time vectors
-len = int(input("Enter the total number of tasks :"))
-# H = [10, 10, 12, 18]
-# S = [2, 4, 6, 9]
-# len = 4
-H = list(map(int, input("Enter the hardware area of each task :").split()))
-S = list(map(int, input("Enter the software time of each task :").split()))
+print_intermediate=False
 
+# len = int(input("Enter the total number of tasks :"))
+# H = list(map(int, input("Enter the hardware area of each task :").split()))
+# S = list(map(int, input("Enter the software time of each task :").split()))
+# D=int(input("Enter the software time limit (constraint) :"))
+
+H = []
+S = []
+D = 200  # Software limit
+len = 20
+for i in range(len):
+    H.append(random.randint(1, 30))
+for i in range(len):
+    S.append(random.randint(1, 30))
 
 triplets = []  # In thhe triplet we store the index and the hardware area and software time
 for i in range(len):
@@ -22,16 +31,17 @@ task_order = []  # The new order of tasks after sorting
 H_prefix = []  # The prefix sum of hardware areas
 S_prefix = []  # The preex sum of software times
 
+cnt = 0
 for ind, *args in sorted_triplets:
     task_order.append(ind)
-    if ind == 0:
+    if cnt == 0:
         H_prefix.append(H[ind])
         S_prefix.append(S[ind])
     else:
         H_prefix.append(H[ind]+H_prefix[-1])
         S_prefix.append(S[ind]+S_prefix[-1])
+    cnt += 1
 
-D = 15  # Software limit
 CB = 1000000  # Current best hardware area, we take a large value since we need to minimize it
 final_solution = []  # Store the final solution
 depth = 0  # Current depth
@@ -52,10 +62,12 @@ def dfs(depth, res, software_limit, H, S):
                 software_time += S[index]
             index += 1
         if software_time > software_limit:
-            print("Allocation impossible, software resources exhausted for :", res)
+            if print_intermediate==True:
+                print("Allocation impossible, software resources exhausted for :", res)
             return
 
-        print("Allocated tasks are :", res)
+        if print_intermediate==True:
+            print("Allocated tasks are :", res)
         if software_time <= software_limit and hardware_area < CB:
             final_solution = res
             CB = hardware_area
