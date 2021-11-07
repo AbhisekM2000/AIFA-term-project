@@ -6,21 +6,21 @@ import random
 
 # We initialize the hardware area and software time vectors
 
-print_intermediate=False
+print_intermediate=True
 
-# len = int(input("Enter the total number of tasks :"))
-# H = list(map(int, input("Enter the hardware area of each task :").split()))
-# S = list(map(int, input("Enter the software time of each task :").split()))
-# D=int(input("Enter the software time limit (constraint) :"))
+len = int(input("Enter the total number of tasks :"))
+H = list(map(int, input("Enter the hardware area of each task :").split()))
+S = list(map(int, input("Enter the software time of each task :").split()))
+D=int(input("Enter the software time limit (constraint) :"))
 
-H = []
-S = []
-D = 100  # Software limit
-len = 10
-for i in range(len):
-    H.append(random.randint(1, 30))
-for i in range(len):
-    S.append(random.randint(1, 30))
+# H = []
+# S = []
+# D = 100  # Software limit
+# len = 10
+# for i in range(len):
+#     H.append(random.randint(1, 30))
+# for i in range(len):
+#     S.append(random.randint(1, 30))
 
 triplets = []  # In thhe triplet we store the index and the hardware area and software time
 for i in range(len):
