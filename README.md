@@ -11,12 +11,12 @@ Given : A task graph with each node $`T_{i}`$ has hardware area cost $`h_{i}`$ a
 Let the binary decision variable be $`y_{i}`$. <br/>
 $`y_{i} =1`$, if $`T_{i}`$ is implemented by Software, else if $`y_{i}`$=0, then it is implemented by hardware.<br/>
 Optimization objective:<br/>
-```math
+
 ![equation](https://latex.codecogs.com/gif.latex?%5Csum_%7Bi%7D%281-y_%7Bi%7D%29h_%7Bi%7D)
-```
+
  
 Subject to constraint:<br/>
-```
+```math
 \sum_{i}y_{i}s_{i} \leq D
 ```
 
