@@ -16,7 +16,7 @@ Optimization objective:<br/>
 ```
  
 Subject to constraint:<br/>
-```math
+```
 \sum_{i}y_{i}s_{i} \leq D
 ```
 
